@@ -29,9 +29,52 @@
 		D64F5BFB2CEAFE0000FFF920 /* WeaveLensUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = WeaveLensUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		D64F5C182CEB016700FFF920 /* Exceptions for "WeaveLens" folder in "WeaveLensTests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Protocols/PhotoLibraryService.swift,
+				ViewModels/PhotoEditorViewModel.swift,
+				ViewModels/PhotoGalleryViewModel.swift,
+				Views/AdjustmentValueIndicatorView.swift,
+				Views/CarouselControlsView.swift,
+				Views/ImageLoadingManager.swift,
+				Views/PhotoCell.swift,
+				Views/PhotoDeniedAccessView.swift,
+				Views/PhotoEditorView.swift,
+				Views/PhotoGalleryView.swift,
+				Views/PhotoGridUIView.swift,
+				Views/PhotoGridViewController.swift,
+			);
+			target = D64F5BF02CEAFE0000FFF920 /* WeaveLensTests */;
+		};
+		D64F5C1B2CEB017B00FFF920 /* Exceptions for "WeaveLens" folder in "WeaveLensUITests" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Protocols/PhotoLibraryService.swift,
+				ViewModels/PhotoEditorViewModel.swift,
+				ViewModels/PhotoGalleryViewModel.swift,
+				Views/AdjustmentValueIndicatorView.swift,
+				Views/CarouselControlsView.swift,
+				Views/ImageLoadingManager.swift,
+				Views/PhotoCell.swift,
+				Views/PhotoDeniedAccessView.swift,
+				Views/PhotoEditorView.swift,
+				Views/PhotoGalleryView.swift,
+				Views/PhotoGridUIView.swift,
+				Views/PhotoGridViewController.swift,
+			);
+			target = D64F5BFA2CEAFE0000FFF920 /* WeaveLensUITests */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		D64F5BE22CEAFE0000FFF920 /* WeaveLens */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				D64F5C182CEB016700FFF920 /* Exceptions for "WeaveLens" folder in "WeaveLensTests" target */,
+				D64F5C1B2CEB017B00FFF920 /* Exceptions for "WeaveLens" folder in "WeaveLensUITests" target */,
+			);
 			path = WeaveLens;
 			sourceTree = "<group>";
 		};
@@ -396,6 +439,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "WeaveLens needs access to your photo library";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -435,6 +479,7 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "WeaveLens needs access to your photo library";
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;

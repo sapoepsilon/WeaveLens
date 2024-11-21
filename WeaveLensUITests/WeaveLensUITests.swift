@@ -8,36 +8,102 @@
 import XCTest
 
 final class WeaveLensUITests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
-        continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    @MainActor
-    func testExample() throws {
-        // UI tests must launch the application that they test.
-        let app = XCUIApplication()
-        app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    @MainActor
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
-    }
+	var app: XCUIApplication!
+	
+	override func setUpWithError() throws {
+		continueAfterFailure = false
+		app = XCUIApplication()
+		
+		// Set launch arguments to control app state
+		app.launchArguments = ["UI-Testing"]
+		
+		// Reset authorization status for Photos
+		let springboard = XCUIApplication(bundleIdentifier: "com.apple.springboard")
+		app.launchArguments.append("--reset-authorization-status-for-photos")
+	}
+	
+	override func tearDownWithError() throws {
+		app = nil
+	}
+	
+	@MainActor
+	func testPhotoGalleryInitialState() throws {
+		// Given
+		app.launch()
+		// Then
+		XCTAssertTrue(app.navigationBars["Photos"].exists)
+	}
+	
+//	@MainActor
+//	func testPhotoAccessDeniedView() throws {
+//		// Given
+//		app.launch()
+//		
+//		// When
+//		let settingsButton = app.buttons["Open Settings"]
+//		
+//		// Then
+//		XCTAssertTrue(settingsButton.waitForExistence(timeout: 5))
+//		XCTAssertTrue(app.staticTexts["Photo Access Required"].exists)
+//		XCTAssertTrue(app.staticTexts["Please allow access to your photos in Settings to use this feature."].exists)
+//	}
+	
+	@MainActor
+	func testPhotoGridLayout() throws {
+		// Given
+		app.launch()
+		
+		// When
+		// Wait for photo grid to appear (assuming photos access is granted)
+		let photoGrid = app.scrollViews.firstMatch
+		let exists = photoGrid.waitForExistence(timeout: 5)
+		
+		// Then
+		XCTAssertTrue(exists)
+		
+		// Test scrolling
+		photoGrid.swipeUp()
+		photoGrid.swipeDown()
+	}
+	
+	@MainActor
+	func testPhotoSelection() throws {
+		// Given
+		app.launch()
+		
+		// When
+		let photoGrid = app.scrollViews.firstMatch
+		guard photoGrid.waitForExistence(timeout: 5) else {
+			XCTFail("Photo grid did not appear")
+			return
+		}
+		
+		// Then
+		// Test first photo cell if it exists
+		let firstPhoto = photoGrid.images.firstMatch
+		if firstPhoto.exists {
+			firstPhoto.tap()
+			// Add assertions for what should happen after tapping
+			// Once you implement photo editor navigation
+		}
+	}
+	
+	@MainActor
+	func testNavigationBarPresence() throws {
+		// Given
+		app.launch()
+		
+		// Then
+		let navBar = app.navigationBars["Photos"]
+		XCTAssertTrue(navBar.exists)
+	}
+	
+	@MainActor
+	func testLaunchPerformance() throws {
+		if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
+			measure(metrics: [XCTApplicationLaunchMetric()]) {
+				XCUIApplication().launch()
+			}
+		}
+	}
 }
